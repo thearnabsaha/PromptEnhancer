@@ -1,8 +1,8 @@
 import { StateGraph, START, END } from "@langchain/langgraph";
 import { ChatGroq } from "@langchain/groq";
 import { HumanMessage } from "langchain";
-import { StateAnnotation } from "./state.ts";
-import { PromptEnhancerPrompt, PromptEnhancerReviewerPrompt } from "./prompt.ts";
+import { StateAnnotation } from "./state.js";
+import { PromptEnhancerPrompt, PromptEnhancerReviewerPrompt } from "./prompt.js";
 
 const model = new ChatGroq({
     model: "openai/gpt-oss-20b",
