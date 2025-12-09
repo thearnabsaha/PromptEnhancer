@@ -24,7 +24,7 @@ type Message = {
   input: string
   answer: string
 }
-const page = () => {
+const Page = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [threadId, setthreadId] = useState("")
   const [timeLeft, setTimeLeft] = useState(30 * 60);
@@ -122,4 +122,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
