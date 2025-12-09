@@ -39,4 +39,5 @@ app.get('/health', async (req, res) => {
     res.status(200).json(healthcheck);
 });
 
-app.listen(port, () => console.log('> Server is up and running on port: ' + port));
+// app.listen(port, () => console.log('> Server is up and running on port: ' + port));
+export default app;
