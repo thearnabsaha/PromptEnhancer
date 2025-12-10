@@ -117,7 +117,7 @@ const Page = () => {
                 // <p className="font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap break-all">
                 //   {e.answer}
                 // </p>
-                <div className="prose prose-slate max-w-none">
+                <div className="prose prose-slate max-w-none my-5 self-start">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {e.answer}
                   </ReactMarkdown>
