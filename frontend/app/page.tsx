@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ModeToggle } from "@/components/ModeToggle";
-import { ArrowUp, MessageCircleDashed } from "lucide-react";
+import { ArrowUp, Check, Copy, MessageCircleDashed } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -30,6 +30,8 @@ type Message = {
 const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [threadId, setthreadId] = useState("");
+  const [copiedText, setCopiedText] = useState("");
+  const [toggle, setToggle] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,7 +40,13 @@ const Page = () => {
         Math.random().toString(36).substring(2, 8)) as string,
     );
   }, []);
-
+  const copyHandler = () => {
+    setToggle(true);
+    navigator.clipboard.writeText(copiedText);
+    setTimeout(() => {
+      setToggle(false);
+    }, 800);
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -110,6 +118,20 @@ const Page = () => {
                     remarkPlugins={[remarkGfm]}
                     components={{
                       blockquote({ children, ...props }) {
+                        const getTextContent = (
+                          node: React.ReactNode,
+                        ): string => {
+                          if (typeof node === "string") return node;
+                          if (typeof node === "number") return String(node);
+                          if (Array.isArray(node))
+                            return node.map(getTextContent).join("");
+                          if (React.isValidElement(node)) {
+                            return getTextContent(node.props.children);
+                          }
+                          return "";
+                        };
+                        () => setCopiedText(getTextContent(children));
+                        console.log(children);
                         return (
                           <div className="relative group">
                             <code
@@ -118,6 +140,20 @@ const Page = () => {
                             >
                               {children}
                             </code>
+                            <div
+                              onClick={copyHandler}
+                              className=" flex flex-col"
+                            >
+                              {toggle ? (
+                                <Button className="bg-amber-200 text-black mt-2 self-end cursor-pointer">
+                                  <Check />
+                                </Button>
+                              ) : (
+                                <Button className="bg-amber-200 text-black mt-2 self-end cursor-pointer">
+                                  <Copy />
+                                </Button>
+                              )}
+                            </div>
                           </div>
                         );
                       },

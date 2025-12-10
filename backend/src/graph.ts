@@ -5,7 +5,8 @@ import { StateAnnotation } from "./state.js";
 import { PromptEnhancerPrompt, PromptEnhancerReviewerPrompt } from "./prompt.js";
 
 const model = new ChatGroq({
-    model: "openai/gpt-oss-safeguard-20b",
+    model: "meta-llama/llama-4-scout-17b-16e-instruct",
+    // model: "openai/gpt-oss-safeguard-20b",
     // model: "openai/gpt-oss-20b",
     temperature: 0
 });
