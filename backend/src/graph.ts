@@ -11,7 +11,7 @@ const model = new ChatGroq({
 
 const writer = async (state: typeof StateAnnotation.State) => {
     const response = await model.invoke([{ role: "system", content: PromptEnhancerPrompt }, ...state.messages]);
-    // console.log(state.messages)
+    console.log(state.messages)
     return { messages: [response], iteration: Number(state.iteration) >= 1 ? state.iteration : 1 };
 };
 const reviewer = async (state: typeof StateAnnotation.State) => {
