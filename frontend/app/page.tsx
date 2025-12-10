@@ -105,8 +105,83 @@ const Page = () => {
                 // <p className="font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap break-all">
                 //   {e.answer}
                 // </p>
-                <div className="prose prose-slate max-w-none my-5 self-start">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <div className="prose prose-slate max-w-none my-5 self-start font-light">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      blockquote({ children, ...props }) {
+                        return (
+                          <div className="relative group">
+                            <code
+                              className="block bg-black text-white p-4 rounded-lg overflow-x-auto font-mono text-sm w-full"
+                              {...props}
+                            >
+                              {children}
+                            </code>
+                          </div>
+                        );
+                      },
+                      code({ node, className, children, ...props }: any) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        const inline = !match; // If no language class, it's inline code
+
+                        return inline ? (
+                          <code
+                            className="bg-[#424242] px-1.5 py-0.5 rounded text-sm font-mono text-white"
+                            {...props}
+                          >
+                            {children}
+                          </code>
+                        ) : (
+                          <code
+                            className="block bg-[#222] text-white p-4 rounded-lg overflow-x-auto font-mono text-sm my-4"
+                            {...props}
+                          >
+                            {children}
+                          </code>
+                        );
+                      },
+                      strong({ children, ...props }) {
+                        return (
+                          <strong className=" font-semibold" {...props}>
+                            {children}
+                          </strong>
+                        );
+                      },
+                      p({ children, ...props }) {
+                        return (
+                          <div className="my-10" {...props}>
+                            {children}
+                          </div>
+                        );
+                      },
+                      ul({ children, ...props }) {
+                        return (
+                          <ul className="list-disc pl-6 space-y-2" {...props}>
+                            {children}
+                          </ul>
+                        );
+                      },
+                      hr({ children, ...props }) {
+                        return (
+                          <hr
+                            className="my-4 border-t border-[#424242]"
+                            {...props}
+                          />
+                        );
+                      },
+                      ol({ children, ...props }) {
+                        return (
+                          <ol
+                            className="list-decimal pl-6 space-y-2"
+                            {...props}
+                          >
+                            {children}
+                          </ol>
+                        );
+                      },
+                    }}
+                  >
                     {e.answer}
                   </ReactMarkdown>
                 </div>
