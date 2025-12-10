@@ -126,12 +126,16 @@ const Page = () => {
                           if (Array.isArray(node))
                             return node.map(getTextContent).join("");
                           if (React.isValidElement(node)) {
-                            return getTextContent(node.props.children);
+                            return getTextContent(
+                              (node.props as { children?: React.ReactNode })
+                                .children,
+                            );
                           }
                           return "";
                         };
-                        () => setCopiedText(getTextContent(children));
-                        console.log(children);
+                        {
+                          () => setCopiedText(getTextContent(children));
+                        }
                         return (
                           <div className="relative group">
                             <code
@@ -145,11 +149,11 @@ const Page = () => {
                               className=" flex flex-col"
                             >
                               {toggle ? (
-                                <Button className="bg-amber-200 text-black mt-2 self-end cursor-pointer">
+                                <Button className="text-white bg-[#424242] mt-2 self-end cursor-pointer">
                                   <Check />
                                 </Button>
                               ) : (
-                                <Button className="bg-amber-200 text-black mt-2 self-end cursor-pointer">
+                                <Button className="mt-2 self-end cursor-pointer text-white bg-[#424242]">
                                   <Copy />
                                 </Button>
                               )}
