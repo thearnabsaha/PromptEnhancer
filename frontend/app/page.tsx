@@ -11,6 +11,7 @@ import { z } from "zod";
 import axios from "axios";
 import { BACKEND_URL } from "@/lib/config";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const formSchema = z.object({
   message: z
@@ -113,8 +114,14 @@ const Page = () => {
                   {e.answer}
                 </p>
               ) : (
-                // : <p className='font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap break-all'>{e.answer}</p>
-                <ReactMarkdown>{e.answer}</ReactMarkdown>
+                // <p className="font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap break-all">
+                //   {e.answer}
+                // </p>
+                <div className="prose prose-slate max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {e.answer}
+                  </ReactMarkdown>
+                </div>
               )}
             </div>
           );

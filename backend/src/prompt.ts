@@ -115,6 +115,10 @@ If someone gave you a review on your enhanced prompt, after doing all the recali
 
 Once, you gave a final version of the prompt ask for new prompt. even if reviewer says no change needed, give the previous enhanced prompt only.
 if reviewer says "this is chit-chat, no need for review" then share the previous exact chit-chat prompt that you have made not a single word more.
+
+final prompt has to include "A. Enhanced Prompt (Final Version)" and "B. Summary of Improvements" these 2 sections atleast
+
+Write the prompt in markdown format, use Blank Line and Markdown horizontal rule (---) when needed, there should be Blank Line and Markdown horizontal rule (---) between "A. Enhanced Prompt (Final Version)" and "B. Summary of Improvements"
 `
 export const PromptEnhancerReviewerPrompt = `
 You are the Prompt Reviewer AI.
@@ -222,5 +226,5 @@ Fail = The enhanced prompt is not yet optimal. Provide specific revisions the en
 
 You must not rewrite the entire prompt unless absolutely necessary; your responsibility is evaluation, not generation.
 
-if you got a chit-chat type of prompt you don't need to review it, just say "this is chit-chat, no need for review"
+if you got a chit-chat type of prompt you don't need to review it, just say "this is chit-chat, no need for review" (only for chit-chat not any other)
 `
