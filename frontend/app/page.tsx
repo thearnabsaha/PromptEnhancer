@@ -30,7 +30,6 @@ type Message = {
 const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [threadId, setthreadId] = useState("");
-  const [copiedText, setCopiedText] = useState("");
   const [toggle, setToggle] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -40,13 +39,7 @@ const Page = () => {
         Math.random().toString(36).substring(2, 8)) as string,
     );
   }, []);
-  const copyHandler = () => {
-    setToggle(true);
-    navigator.clipboard.writeText(copiedText);
-    setTimeout(() => {
-      setToggle(false);
-    }, 800);
-  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -133,9 +126,14 @@ const Page = () => {
                           }
                           return "";
                         };
-                        {
-                          () => setCopiedText(getTextContent(children));
-                        }
+                        const copyHandler = () => {
+                          const textcontent = getTextContent(children);
+                          setToggle(true);
+                          navigator.clipboard.writeText(textcontent);
+                          setTimeout(() => {
+                            setToggle(false);
+                          }, 800);
+                        };
                         return (
                           <div className="relative group">
                             <code
