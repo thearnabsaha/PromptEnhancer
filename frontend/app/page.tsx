@@ -121,7 +121,14 @@ const Page = () => {
                           </div>
                         );
                       },
-                      code({ node, className, children, ...props }: any) {
+                      code({
+                        className,
+                        children,
+                        ...props
+                      }: {
+                        className?: string;
+                        children?: React.ReactNode;
+                      }) {
                         const match = /language-(\w+)/.exec(className || "");
                         const inline = !match; // If no language class, it's inline code
 
