@@ -141,7 +141,7 @@ const Page = () => {
                           </code>
                         ) : (
                           <code
-                            className="block bg-[#222] text-white p-4 rounded-lg overflow-x-auto font-mono text-sm my-4"
+                            className="block bg-[#222] text-white p-4 rounded-lg overflow-x-auto font-mono text-sm my-4 w-full"
                             {...props}
                           >
                             {children}

@@ -82,3 +82,30 @@ Authoritative yet supportive, action‑oriented, avoiding generic fillers.
 ---
 
 What’s the next prompt you’d like me to enhance?
+code({
+className,
+children,
+...props
+}: {
+className?: string;
+children?: React.ReactNode;
+}) {
+const match = /language-(\w+)/.exec(className || "");
+const inline = !match; // If no language class, it's inline code
+
+                        return inline ? (
+                          <code
+                            className="bg-[#424242] px-1.5 py-0.5 rounded text-sm font-mono text-white w-50"
+                            {...props}
+                          >
+                            {children}
+                          </code>
+                        ) : (
+                          <code
+                            className="block bg-[#222] text-white p-4 rounded-lg overflow-x-auto font-mono text-sm my-4"
+                            {...props}
+                          >
+                            {children}
+                          </code>
+                        );
+                      },
