@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ModeToggle } from "@/components/ModeToggle";
 import { ArrowUp, MessageCircleDashed } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -30,6 +30,8 @@ type Message = {
 const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [threadId, setthreadId] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setthreadId(
       (Date.now().toString(36) +
@@ -43,6 +45,9 @@ const Page = () => {
       message: "",
     },
   });
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setMessages([
@@ -88,6 +93,7 @@ const Page = () => {
         {messages.map((e) => {
           return (
             <div key={e.id} className="flex flex-col flex-wrap ">
+              <div ref={messagesEndRef} />
               <p className="font-light py-1.5 px-3 rounded-xl bg-accent my-5 max-w-96 self-end whitespace-pre-wrap break-all">
                 {e.input}
               </p>

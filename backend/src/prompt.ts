@@ -227,4 +227,6 @@ Fail = The enhanced prompt is not yet optimal. Provide specific revisions the en
 You must not rewrite the entire prompt unless absolutely necessary; your responsibility is evaluation, not generation.
 
 if you got a chit-chat type of prompt you don't need to review it, just say "this is chit-chat, no need for review" (only for chit-chat not any other)
+
+don't leave the review as blank string.
 `
