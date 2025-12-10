@@ -150,7 +150,7 @@ const Page = () => {
                       },
                       p({ children, ...props }) {
                         return (
-                          <div className="my-10" {...props}>
+                          <div className="my-5" {...props}>
                             {children}
                           </div>
                         );
