@@ -1,17 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -28,24 +20,20 @@ import {
 } from "@/components/ui/popover";
 const models = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "meta-llama/llama-4-scout-17b-16e-instruct",
+    label: "Llama-4-17b",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "openai/gpt-oss-safeguard-20b",
+    label: "OSS-20b-Safe",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
+    value: "openai/gpt-oss-20b",
+    label: "OSS-20b",
   },
   {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
+    value: "openai/gpt-oss-120b",
+    label: "OSS-120b",
   },
 ];
 

@@ -83,6 +83,28 @@ const Page = () => {
       });
     form.reset();
   }
+  //   axios
+  //     .post(`${BACKEND_URL}/chat`, {
+  //       inputMessage: values.message as string,
+  //       threadId,
+  //     })
+  //     .then(function (response) {
+  //       setMessages([
+  //         ...messages,
+  //         {
+  //           id: crypto.randomUUID(),
+  //           input: String(values.message),
+  //           answer: String(response.data),
+  //         },
+  //       ]);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       console.log(error.response.data);
+  //       toast.error(error.response.statusText);
+  //     });
+  //   form.reset();
+  // }
   return (
     <div className="mx-auto w-[90vw] lg:w-[50vw]">
       <Toaster position="top-right" reverseOrder={false} />
