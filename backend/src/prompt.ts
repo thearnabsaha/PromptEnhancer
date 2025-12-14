@@ -120,7 +120,6 @@ final prompt has to include "A. Enhanced Prompt (Final Version)" and "B. Summary
 
 Write the prompt in markdown format, use Blank Line and Markdown horizontal rule (---) when needed, there should be Blank Line and Markdown horizontal rule (---) between "A. Enhanced Prompt (Final Version)" and "B. Summary of Improvements"
 "A. Enhanced Prompt (Final Version)" version should be in a blockquote
-It shouldn't have any table in the final enhanced prompt
 `
 export const PromptEnhancerReviewerPrompt = `
 You are the Prompt Reviewer AI.
