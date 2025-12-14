@@ -3,15 +3,18 @@ import { ChatGroq } from "@langchain/groq";
 import { HumanMessage } from "langchain";
 import { StateAnnotation } from "./state.js";
 import { PromptEnhancerPrompt, PromptEnhancerReviewerPrompt } from "./prompt.js";
-
-const model = new ChatGroq({
-    // model: "meta-llama/llama-4-scout-17b-16e-instruct",
-    // model: "openai/gpt-oss-safeguard-20b",
-    model: "openai/gpt-oss-20b",
-    // model: "openai/gpt-oss-120b",
-    temperature: 0
-});
-
+let model: any;
+export const changeModel = (SelecedModel: string) => {
+    model = new ChatGroq({
+        // model: "meta-llama/llama-4-scout-17b-16e-instruct",
+        // model: "openai/gpt-oss-safeguard-20b",
+        // model: "openai/gpt-oss-20b",
+        // model: "openai/gpt-oss-120b",
+        model: SelecedModel,
+        temperature: 0
+    });
+    return model;
+}
 const writer = async (state: typeof StateAnnotation.State) => {
     const response = await model.invoke([{ role: "system", content: PromptEnhancerPrompt }, ...state.messages]);
     // console.log(state.messages)
