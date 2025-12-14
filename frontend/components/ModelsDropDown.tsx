@@ -21,25 +21,25 @@ import {
 const models = [
   {
     value: "meta-llama/llama-4-scout-17b-16e-instruct",
-    label: "Llama-4-17b",
+    label: "Meta-Llama-4-17b",
   },
   {
     value: "openai/gpt-oss-safeguard-20b",
-    label: "OSS-20b-Safe",
+    label: "OpenAI-OSS-20b-Safe",
   },
   {
     value: "openai/gpt-oss-20b",
-    label: "OSS-20b",
+    label: "OpenAI-OSS-20b",
   },
   {
     value: "openai/gpt-oss-120b",
-    label: "OSS-120b",
+    label: "OpenAI-OSS-120b",
   },
 ];
 
 export function ModelsDropDown() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("openai/gpt-oss-20b");
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

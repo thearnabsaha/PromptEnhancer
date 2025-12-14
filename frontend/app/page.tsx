@@ -64,6 +64,7 @@ const Page = () => {
     axios
       .post(`${BACKEND_URL}/chat`, {
         inputMessage: values.message as string,
+        // model: values.message as string,
         threadId,
       })
       .then(function (response) {
