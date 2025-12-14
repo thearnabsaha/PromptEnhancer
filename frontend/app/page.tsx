@@ -2,13 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ModeToggle } from "@/components/ModeToggle";
-import {
-  ArrowUp,
-  Check,
-  Copy,
-  MessageCircleDashed,
-  ChevronsUpDown,
-} from "lucide-react";
+import { ArrowUp, Check, Copy, MessageCircleDashed } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -19,42 +13,7 @@ import { BACKEND_URL } from "@/lib/config";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import toast, { Toaster } from "react-hot-toast";
-import { cn } from "@/lib/utils";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-const models = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+import { ModelsDropDown } from "@/components/ModelsDropDown";
 
 const formSchema = z.object({
   message: z
@@ -75,8 +34,7 @@ const Page = () => {
   const [threadId, setthreadId] = useState("");
   const [toggle, setToggle] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+
   useEffect(() => {
     setthreadId(
       (Date.now().toString(36) +
@@ -135,49 +93,7 @@ const Page = () => {
         </div>
         <div className=" flex justify-center items-center gap-5">
           <ModeToggle />
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                role="combobox"
-                aria-expanded={open}
-                className="w-[200px] justify-between"
-              >
-                {value
-                  ? models.find((model) => model.value === value)?.label
-                  : "Select model..."}
-                <ChevronsUpDown className="opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput placeholder="Search model..." className="h-9" />
-                <CommandList>
-                  <CommandEmpty>No model found.</CommandEmpty>
-                  <CommandGroup>
-                    {models.map((model) => (
-                      <CommandItem
-                        key={model.value}
-                        value={model.value}
-                        onSelect={(currentValue) => {
-                          setValue(currentValue === value ? "" : currentValue);
-                          setOpen(false);
-                        }}
-                      >
-                        {model.label}
-                        <Check
-                          className={cn(
-                            "ml-auto",
-                            value === model.value ? "opacity-100" : "opacity-0",
-                          )}
-                        />
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
+          <ModelsDropDown />
         </div>
       </div>
       <div className="flex flex-col flex-wrap mb-100 pt-10">
