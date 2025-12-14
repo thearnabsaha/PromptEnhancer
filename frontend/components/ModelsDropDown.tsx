@@ -37,9 +37,15 @@ const models = [
   },
 ];
 
-export function ModelsDropDown() {
+export function ModelsDropDown({
+  value,
+  setValue,
+}: {
+  value: string;
+  setValue: (value: string) => void;
+}) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("openai/gpt-oss-20b");
+  // const [value, setValue] = React.useState("openai/gpt-oss-20b");
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

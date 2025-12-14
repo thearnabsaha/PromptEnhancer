@@ -34,6 +34,7 @@ const Page = () => {
   const [threadId, setthreadId] = useState("");
   const [toggle, setToggle] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState("openai/gpt-oss-20b");
 
   useEffect(() => {
     setthreadId(
@@ -64,7 +65,7 @@ const Page = () => {
     axios
       .post(`${BACKEND_URL}/chat`, {
         inputMessage: values.message as string,
-        // model: values.message as string,
+        model: value as string,
         threadId,
       })
       .then(function (response) {
@@ -84,28 +85,6 @@ const Page = () => {
       });
     form.reset();
   }
-  //   axios
-  //     .post(`${BACKEND_URL}/chat`, {
-  //       inputMessage: values.message as string,
-  //       threadId,
-  //     })
-  //     .then(function (response) {
-  //       setMessages([
-  //         ...messages,
-  //         {
-  //           id: crypto.randomUUID(),
-  //           input: String(values.message),
-  //           answer: String(response.data),
-  //         },
-  //       ]);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //       console.log(error.response.data);
-  //       toast.error(error.response.statusText);
-  //     });
-  //   form.reset();
-  // }
   return (
     <div className="mx-auto w-[90vw] lg:w-[50vw]">
       <Toaster position="top-right" reverseOrder={false} />
@@ -116,7 +95,7 @@ const Page = () => {
         </div>
         <div className=" flex justify-center items-center gap-5">
           <ModeToggle />
-          <ModelsDropDown />
+          <ModelsDropDown value={value} setValue={setValue} />
         </div>
       </div>
       <div className="flex flex-col flex-wrap mb-100 pt-10">
